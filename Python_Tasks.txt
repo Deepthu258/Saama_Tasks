@@ -1,0 +1,34 @@
+TASK 1:
+I am still a new learner in python, but i think below approach works well while handling large csv file loading 
+using python
+
+- change our code to accommodate these restrictions and make the entire ingestion process much faster on the way.
+
+Scenario1 : We have many ways of loading data into table using psycopg/psycopg2 commands like 
+execute_many()
+execute_batch()
+copy_from()
+
+when we have enough resources to increase the memory, we can always aching results using these commands.
+But to increase the code performance both in time and memory we can make use of iterators and buffer size
+like below function,
+
+copy_string_iterator(connection, Data: Iterator[Dict[str, Any]], size: int = 8192) 
+
+
+Scenario2 :
+we can try to split the large file into smaller file with required file size 
+and process them individually using same Code, so job will not break and we can process them parallely.
+
+
+TASK 2:
+In Sql I may use control table to list out similar values together and update any matching value to 
+a common value then remove the duplicates.
+example: 
+Incoming values                          -Merged/updated values
+Equipment ONLY - Saama Technologies      -Saama Technologies
+Saama Technologies                       -Saama Technologies
+SaamaTech, Inc.                          -Saama Technologies
+
+In Python, i can try to use reg expression and update the matching values first 
+and then remove duplicate records or combine two records using aggregation. 
